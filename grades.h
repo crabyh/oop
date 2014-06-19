@@ -1,4 +1,4 @@
-//
+﻿//
 //  grades.h
 //  1
 //
@@ -10,20 +10,24 @@
 #define _____grades_h
 
 #include "head.h"
+#include "students.h"
 #include "courses.h"
+
 class grades{
 private:
+    string grade_id;
     short grade;
 	courses *course;
-	grades *next_grade;//用链表储存学生成绩
-	grades(){}
+	students *student;
 public:
-	grades(const short grad, courses *cour):
-		grade(grad), course(cour), next_grade(NULL){}//构造函数
+	grades(){}//默认构造函数
+	grades(string gid, short grad, courses *cour, students *stu) :
+		grade_id(gid), grade(grad), course(cour), student(stu){}//构造函数
 	~grades(){}//析构函数
-	void set_grade(const short grad);//修改成绩
-	const short get_grade() const;//返回成绩
+	void set_grade(short grad);//修改成绩
+	string get_grade_info();//返回成绩信息
 	friend class students;
+	friend class courses;
 };
 
 #endif

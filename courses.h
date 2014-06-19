@@ -1,4 +1,4 @@
-//
+﻿//
 //  courses.h
 //  1
 //
@@ -10,19 +10,26 @@
 #define _____courses_h
 
 #include "head.h"
+class grades;
+
 class courses{
 private:
-	const string course_id;
-	const string course_name;
-	const double credit;
-	const string teacher;
+    string course_id;
+	string course_name;
+	double credit;
+	string teacher;
+	vector<grades> cgp;
 public:
-	courses(const string cid, const string cname, const double cred, const string t):
+	courses(){}//默认构造函数
+	courses(string cid, string cname, double cred, string t):
 		course_id(cid), course_name(cname), credit(cred), teacher(t){}//构造函数
 	~courses(){}//析构函数
-	const double get_credit();//返回学分
-	const string course_info();//返回课程信息
+	double get_credit();//返回学分
+	string get_course_info();//返回课程信息
+	void add_grade_to_course(vector<grades> grad);//添加成绩到课程
+	double get_course_average();//计算课程平均分
 	friend class grades;
+	friend class students;
 };
 
 #endif

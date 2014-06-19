@@ -8,12 +8,13 @@
 
 #include "grades.h"
 
-void grades::set_grade(const short grad)//修改成绩
+void grades::set_grade(short grad)//修改成绩
 {
 	grade = grad;
 }
 
-const short grades::get_grade() const//返回成绩
+string grades::get_grade_info()//返回成绩信息
 {
-	return grade;
+	return grade_id + ' ' + course->get_course_info() + ' ' + to_string(course->get_credit()) + ' ' + student->get_student_info() + ' ' + to_string(grade);
 }
+

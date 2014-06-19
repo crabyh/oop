@@ -1,4 +1,4 @@
-//
+﻿//
 //  head.h
 //  1
 //
@@ -11,11 +11,11 @@
 
 #include <iostream>
 #include <string>
+#include <list>
+#include <fstream>
+#include <vector>
+#include <iomanip> 
+#include<windows.h>
 using namespace std;
 
-bool load();//从文件系统读取数据
-bool save();//存储数据到文件系统
-void interface();//输出终端框架
-double get_course_score();//计算某门课的分数统计
-
-#endif /* defined(_____main__) */
+#endif

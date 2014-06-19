@@ -8,24 +8,28 @@
 
 #ifndef __students_h
 #define __students_h
+
 #include "head.h"
-#include "grades.h"
-#include "courses.h"
+class grades;
+
 class students{
 private:
-	const string student_name;
-	const string student_id;
-	const string gender;
-	grades *grade_pointer;//用链表储存学生成绩
-	students(){}//阻止默认构造
+    string student_id;
+    string student_name;
+    string gender;
+	vector<grades> sgp;
 public:
-	students(const string sname, const string sid, const string gend):
-		student_name(sname), student_id(sid), gender(gend), grade_pointer(NULL){}//构造函数
+	students(){}//默认构造函数
+	students(string sid, string sname, string gend):
+        student_id(sid), student_name(sname), gender(gend){}//构造函数
+	students(const students& s):
+		student_id(s.student_id), student_name(s.student_name), gender(s.gender), sgp(NULL){}//拷贝构造函数
 	~students(){}//析构函数
-	const void add_grade(grades &grad);//添加成绩
-	const string show_grade() const;//显示学生所有成绩
-	const double get_GPA() const;//计算学生均绩
-	const string show_info() const;//显示学生信息
+	string get_all_grade();//显示学生所有成绩
+	string get_student_info();//显示学生信息
+	double get_GPA();//计算学生均绩
+	void add_grade_to_student(vector<grades> grad);//添加成绩到学生
+	friend class grades;
 };
 
 #endif
