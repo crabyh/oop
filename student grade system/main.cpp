@@ -172,6 +172,7 @@ int main()
 	}
 	catch (login_exception &){
 		cout << "密码错误！！" << endl;
+		system("pause");
 		exit(0);
 	}
 	while (1){
