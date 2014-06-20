@@ -17,11 +17,7 @@ class input_exception :base_exception{
 	virtual void except(){}
 };
 
-class read_exception :base_exception{
-	virtual void except(){}
-};
-
-class write_exception :base_exception{
+class file_exception :base_exception{
 	virtual void except(){}
 };
 

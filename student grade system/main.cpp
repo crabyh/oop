@@ -215,7 +215,7 @@ int main()
 			case 2:
 			{
 					  fstream fs("./students.txt", ios::app);
-					  if (!fs) return -1;
+					  if (!fs) throw file_exception();
 					  string sid, sname, sgender;
 					  cout << "输入学生号、姓名、性别，输入0返回上一级" << endl;
 					  cout << "例如：s01 maoyuhan male" << endl;
@@ -223,6 +223,8 @@ int main()
 					  if (sid == "0")
 						  break;
 					  cin >> sname >> sgender;
+					  if (sid[0] != 's' || (sgender!="male"&&sgender!="female"))
+						  throw input_exception();
 					  students s(sid, sname, sgender);
 					  fs << s.get_student_info() << endl;
 					  fs.close();
@@ -239,7 +241,7 @@ int main()
 			case 4:
 			{
 					  fstream fc("./courses.txt", ios::app);
-					  if (!fc) return -1;
+					  if (!fc) throw file_exception();
 					  cout << "输入课程号、课程名称、学分、老师，输入0返回上一级" << endl;
 					  cout << "例如：c01 oop hulanqing 2.5" << endl;
 					  string cid, cname, ct;
@@ -248,6 +250,8 @@ int main()
 					  if (cid == "0")
 						  break;
 					  cin >> cname >> ccredit >> ct;
+					  if (cid[0] != 's' )
+						  throw input_exception();
 					  courses c(cid, cname, ccredit, ct);
 					  fc << c.get_course_info() + ' ' + to_string(c.get_credit()) << endl;
 					  fc.close();
@@ -264,7 +268,7 @@ int main()
 			case 6:
 			{
 					  fstream fg("./grades.txt", ios::app);
-					  if (!fg) return -1;
+					  if (!fg) throw file_exception();
 					  short grad;
 					  cout << "输入成绩号、成绩、课程号、学生号，输入0返回上一级" << endl;
 					  cout << "例如：g01 89 c01 s01 " << endl;
@@ -272,6 +276,8 @@ int main()
 					  if (gid == "0")
 						  break;
 					  cin >> grad >> cid >> sid;
+					  if (gid[0] != 'g' || cid[0] != 'c' || sid[0] != 's' || grad < 0 || grad > 100)
+						  throw input_exception();
 					  st = read_find_student(1, sid, "./students.txt", stu);
 					  ct = read_find_course(1, cid, "./courses.txt", cour);
 					  grades g(gid, grad, &ct, &st);
@@ -290,6 +296,8 @@ int main()
 					  if (gid == "0")
 						  break;
 					  cin >> grade;
+					  if (gid[0] != 'g' || grade < 0 || grade > 100)
+						  throw input_exception();
 					  gv = read_find_grade(1, gid, cid, sid, "./grades.txt", grad, grade);
 					  cout << "修改成功！" << endl;
 					  cout << gv.data()->get_grade_info() << endl;
@@ -301,6 +309,8 @@ int main()
 					  cin >> sid;
 					  if (sid == "0")
 						  break;
+					  if (sid[0] != 's')
+						  throw input_exception();
 					  gv = read_find_grade(3, gid, cid, sid, "./grades.txt", grad);
 					  st = read_find_student(1, sid, "./students.txt", stu);
 					  st.add_grade_to_student(gv);
@@ -315,6 +325,8 @@ int main()
 					  cin >> cid;
 					  if (cid == "0")
 						  break;
+					  if (cid[0] != 'c')
+						  throw input_exception();
 					  gv = read_find_grade(2, gid, cid, sid, "./grades.txt", grad);
 					  ct = read_find_course(1, cid, "./courses.txt", cour);
 					  ct.add_grade_to_course(gv);
@@ -326,13 +338,10 @@ int main()
 			}//switch
 		} // try
 		catch (input_exception &){
-			cout << "输入错误！！" << endl;
+			cout << "输入格式错误！！" << endl;
 		}
-		catch (write_exception &){
-			cout << "写入文件失败" << endl;
-		}
-		catch (read_exception &){
-			cout << "读取数据失败" << endl;
+		catch (file_exception &){
+			cout << "文件存储失败" << endl;
 		}
 		system("pause");
 	}//while
