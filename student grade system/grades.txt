@@ -5,3 +5,4 @@ g04 c02 ads fengyan 1.500000 s01 maoyuhan male 90
 g05 c03 jizu zhangmingmin 4.000000 s03 yanghanyu male 93
 g06 c01 oop hulanqing 2.500000 s03 yanghanyu male 86
 g07 c02 ads fengyan 1.500000 s03 yanghanyu male 94
+g08 c04 lisan zhangsanyuan 4.000000 s03 yanghanyu male 93

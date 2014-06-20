@@ -13,8 +13,7 @@
 #include <string>
 #include <list>
 #include <fstream>
-#include <vector>
-#include <iomanip> 
+#include <vector> 
 #include<windows.h>
 using namespace std;
 
